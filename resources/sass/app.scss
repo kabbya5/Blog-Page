@@ -6,3 +6,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//layouts
+@import './layout/header-nav';
+
+//page 
+//page 
+@import './components/postLayout';
+@import './pages/welcome';

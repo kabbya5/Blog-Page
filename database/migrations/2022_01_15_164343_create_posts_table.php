@@ -15,8 +15,11 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users')->onDelete('restrict');
             $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger("category_id");
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('excerpt');
