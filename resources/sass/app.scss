@@ -1,6 +1,8 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+//utitilies
+@import './base/utitlities';
 // Variables
 @import 'variables';
 
@@ -9,8 +11,20 @@
 
 //layouts
 @import './layout/header-nav';
+@import './layout/carouser';
+@import './layout/postLayout-1';
 
-//page 
 //page 
 @import './components/postLayout';
 @import './pages/welcome';
+a {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  a[title]{
+    content: attr(title);
+    background-color: blak;
+    color:$bg-slate-50;
+  }

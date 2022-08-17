@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\BlogController;
 //Admin
 use App\Http\Controllers\admin\SiteIconController;
 
@@ -31,3 +32,10 @@ Route::post('/setting/icons/store',[SiteIconController::class,'store'])->name('i
 Route::get('/setting/icons/edit/{icon}',[SiteIconController::class,'edit'])->name('icons.edit');
 Route::put('/setting/icons/update/{icon}',[SiteIconController::class,'update'])->name('icons.update');
 Route::delete('/setting/icons/delete/{icon}',[SiteIconController::class,'delete'])->name('icons.delete');
+
+// New Block
+Route::get('/new',[BlogController::class,'index'])->name('blog.index');
+
+Route::get('/show', function (){
+  return view('blog.pages.show');
+});

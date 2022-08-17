@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
 use View;
@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
         view::share('now',Carbon::today()->format('F d, Y'));
     }
 }
