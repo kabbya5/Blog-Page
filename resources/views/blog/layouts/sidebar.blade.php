@@ -47,45 +47,21 @@
             </div>
             <div class="widget-body">
                 <ul class="popular-posts">
-                    <li>
-                        <div class="post-image">
-                            <a href="#">
-                                <img src="img/Post_Image_5_thumb.jpg" />
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h6><a href="#">Blog Post #5</a></h6>
-                            <div class="post-meta">
-                                <span>36 minutes ago</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="post-image">
-                            <a href="#">
-                                <img src="img/Post_Image_4_thumb.jpg" />
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h6><a href="#">Blog Post #4</a></h6>
-                            <div class="post-meta">
-                                <span>36 minutes ago</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="post-image">
-                            <a href="#">
-                                <img src="img/Post_Image_3_thumb.jpg" />
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h6><a href="#">Blog Post #3</a></h6>
-                            <div class="post-meta">
-                                <span>36 minutes ago</span>
-                            </div>
-                        </div>
-                    </li>
+                  @foreach ($popularPosts as  $post)
+                      <li>
+                          <div class="post-image">
+                              <a href="/show">
+                                  <img src="{{asset($post->image_url)}}" class="img-fluid" width="220" height="100">
+                              </a>
+                          </div>
+                          <div class="post-body">
+                              <h6><a href="/show"> {{$post->title}}</a></h6>
+                              <div class="post-meta">
+                                  <span>{{$post->date}}</span>
+                              </div>
+                          </div>
+                      </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
