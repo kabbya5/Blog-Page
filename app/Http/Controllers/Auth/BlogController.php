@@ -1,10 +1,14 @@
 <?php
 
+
+
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
@@ -15,9 +19,26 @@ class BlogController extends Controller
      */
     public function index()
     {
+        $categories = Category::with('posts')->orderBy('title','desc')->get();
         $posts = Post::with('author')->latestFirst()
         ->published()->paginate(3);
-        return view('blog.index',compact('posts'));
+        return view('blog.index',compact('posts','categories'));
+    }
+
+
+    public function category(Category $category){
+        $categories = Category::with(['posts' => function ($query){
+          $query->published();
+        }])->orderBy('title','desc')->get();
+      $posts = $category->posts()->with('author')->latestFirst()
+      ->published()->paginate(3);
+
+      return view('blog.index',compact('posts','categories'));
+    }
+
+
+    public function author(User $author){
+      
     }
 
     /**
@@ -49,7 +70,10 @@ class BlogController extends Controller
      */
     public function show(Post $post)
     {
-        //
+
+        $post->increment('view_count',1);
+
+        return view('blog.pages.show',compact('post'));
     }
 
     /**

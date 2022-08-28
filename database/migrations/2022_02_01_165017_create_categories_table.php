@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('img');
-            $table->string('img_tag');
+            $table->string('img_tag')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,8 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+      Schema::disableForeignKeyConstraints();
+      Schema::dropIfExists('category');
+      Schema::enableForeignKeyConstraints();
     }
 }

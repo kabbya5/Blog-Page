@@ -24,6 +24,15 @@ Route::get('/',[PostController::class,'index']);
 Route::resource('posts', PostController::class)->except('index');
 
 
+
+// New Block
+Route::get('/new',[BlogController::class,'index'])->name('blog.index');
+
+Route::get('/new/{post}',[BlogController::class,'show'])->name('post.show');
+Route::get('/new/category/{category}',[BlogController::class,'category'])->name('category.posts');
+Route::get('/new/{user}',[BlogController::class,'author'])->name('author.posts');
+
+
 //Admin section
 
 Route::get('/setting/icons',[SiteIconController::class,'index'])->name('icons');
@@ -32,10 +41,3 @@ Route::post('/setting/icons/store',[SiteIconController::class,'store'])->name('i
 Route::get('/setting/icons/edit/{icon}',[SiteIconController::class,'edit'])->name('icons.edit');
 Route::put('/setting/icons/update/{icon}',[SiteIconController::class,'update'])->name('icons.update');
 Route::delete('/setting/icons/delete/{icon}',[SiteIconController::class,'delete'])->name('icons.delete');
-
-// New Block
-Route::get('/new',[BlogController::class,'index'])->name('blog.index');
-
-Route::get('/show', function (){
-  return view('blog.pages.show');
-});

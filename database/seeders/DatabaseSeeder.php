@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory()->count(10)
-         ->hasPosts(rand(2,3))->create();
+         $this->call(UserTabkeSeeder::class);
+         $this->call(CategoriesTableseeder::class);
+         $this->call(PostTableSeeder::class);
     }
 }
