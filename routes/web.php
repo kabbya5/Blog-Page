@@ -30,7 +30,7 @@ Route::get('/new',[BlogController::class,'index'])->name('blog.index');
 
 Route::get('/new/{post}',[BlogController::class,'show'])->name('post.show');
 Route::get('/new/category/{category}',[BlogController::class,'category'])->name('category.posts');
-Route::get('/new/{user}',[BlogController::class,'author'])->name('author.posts');
+Route::get('/new/author/{user}',[BlogController::class,'authorPost'])->name('author.posts');
 
 
 //Admin section

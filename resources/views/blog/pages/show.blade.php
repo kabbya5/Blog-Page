@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <article class="post-item post-detail">
                 <div class="post-item-image">
-                    <a href="#">
+                    <a href="{{route('post.show', $post->slug)}}">
                       <img src="{{$post->image_url}}" alt="" height="400" class="img-fluid">
                     </a>
                 </div>
@@ -25,7 +25,7 @@
                             </ul>
                         </div>
 
-                        <p>{{$post->body}}</p>
+                        <p>{!! $post->body_html !!}</p>
 
                     </div>
                 </div>
@@ -39,14 +39,17 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="#">Masaru Edo</a></h4>
+                    <h4 class="media-heading"><a href="{{route('author.posts',$post->author->slug)}}"> {{$post->author->name}}</a></h4>
                     <div class="post-author-count">
-                      <a href="#">
+                      <a href="{{route('author.posts',$post->author->slug)}}">
                           <i class="fa fa-clone"></i>
-                          90 posts
+                          @php
+                          $postCount = $post->author->posts->count()
+                          @endphp
+                          {{$postCount}} {{str_plural('post',$postCount)}}
                       </a>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia excepturi neque sint magnam minus aliquam, voluptatem, labore quis praesentium eum quae dolorum temporibus consequuntur! Non.</p>
+                    <p>{!! $post->author->bio_html !!}</p>
                   </div>
                 </div>
             </article>

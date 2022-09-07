@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Category;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Post extends Model
 {
@@ -53,5 +54,9 @@ class Post extends Model
     }
     public function scopePopular($query){
       return $query->orderBy('view_count', 'desc');
+    }
+
+    public function getBodyHtmlAttribute($value){
+      return $this->body ? Markdown::convertToHtml(e($this->body)) : NULL;
     }
 }

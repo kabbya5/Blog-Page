@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
 
 class BlogController extends Controller
 {
@@ -27,18 +28,23 @@ class BlogController extends Controller
 
 
     public function category(Category $category){
-        $categories = Category::with(['posts' => function ($query){
-          $query->published();
-        }])->orderBy('title','desc')->get();
+        $categoryName = $category->title;
+
       $posts = $category->posts()->with('author')->latestFirst()
       ->published()->paginate(3);
-
-      return view('blog.index',compact('posts','categories'));
+      return view('blog.index',compact('posts','categoryName'));
     }
 
 
-    public function author(User $author){
-      
+    public function authorPost(User $user){
+      $authorName = $user->name;
+      $posts = $user->posts()
+                        ->with('author')
+                        ->latestFirst()
+                        ->published()
+                        ->paginate(3);
+
+      return view('blog.index',compact('posts','authorName'));
     }
 
     /**
